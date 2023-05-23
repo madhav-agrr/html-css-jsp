@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script>
+        function validate_form(){
+        var name=document.myform.name.value;
+        var password=document.myform.password.value;
+        var Rollno=document.myform.password.value;
+        if(name==null || name==""){
+             alert("name can't be blank");
+             return false;
+        }
+        else if(password.length<6){
+             alert("password must be at least 6 character long");
+             return false;
+        }
+        else if(Rollno.length<=7){
+             alert("Rollno upto 7 digit is allowed");
+        }
+       }
+    </script>
+  </head>
+  <body>
+       <form name="myform" Method="post" onsubmit="return validate_form()">
+          <h2>name</h2>
+             <input type="text" name="name">
+          <h3>password</h3>
+             <input type="password" name="password">
+          <h4>Rollno.</h4>
+             <input type="text" name="Rollno.">
+          <h5>DOB<h5>
+             <input type="date" required="true">
+             </br></br>
+             <input type="submit" value="submit">
+			 <input type="radio" value="a">
+			 
+       </form>
+  </body>
+</html>

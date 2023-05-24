@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customer Feedback Form</title>
+	<style>
+		body {
+			font-family: Times New Roman, sans-serif;
+			background-color: #f2f2f2;
+		}
+
+		h1 {
+			text-align: center;
+			color: #333;
+		}
+
+		form {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+			margin: 50px auto;
+			max-width: 600px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			color: #333;
+			font-weight: bold;
+		}
+
+		input[type="text"],
+		textarea,
+		input[type="number"] {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			font-size: 16px;
+			resize: vertical;
+		}
+
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		input[type="radio"] {
+			margin-right:10px;
+		}
+
+		input[type="checkbox"] {
+			margin-right:10px;
+		}
+
+		input[type="submit"]:hover {
+			background-color:#45a049;
+		}
+
+		.required:after {
+			content:" *";
+			color:red;
+		}
+
+		.footer {
+			position:fixed;
+			bottom:10px;
+			right:10px;
+			color:black;
+			font-weight:bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Customer Feedback Form</h1>
+	<form id="feedback-form">
+		<label for="name">Name<span class="required"></span></label>
+		<input type="text" id="name" name="name" required>
+
+		<label for="email">Email<span class="required"></span></label>
+		<input type="text" id="email" name="email" required>
+
+		<label for="phone">Phone number</label>
+		<input type="text" id="phone" name="phone" value="+91">
+		<label>How satisfied are you with our product?<span class="required"></span></label>
+		<input type="radio" name="satisfaction" value="Very Satisfied">Very Satisfied<br>
+		<input type="radio" name="satisfaction" value="Satisfied">Satisfied<br>
+		<input type="radio" name="satisfaction" value="Neutral">Neutral<br>
+		<input type="radio" name="satisfaction" value="Dissatisfied">Dissatisfied<br>
+		<input type="radio" name="satisfaction" value="Very Dissatisfied">Very Dissatisfied<br>
+		<br>
+		<label>How easy was it to use our product?<span class="required"></span></label>
+		<input type="radio" name="ease-of-use" value="Very Easy">Very Easy<br>
+		<input type="radio" name="ease-of-use" value="Easy">Easy<br>
+		<input type="radio" name="ease-of-use" value="Neutral">Neutral<br>
+		<input type="radio" name="ease-of-use" value="Difficult">Difficult<br>
+		<input type="radio" name="ease-of-use" value="Very Difficult">Very Difficult<br>
+		<br>
+		<label>How likely are you to recommend our product to others?<span class="required"></span></label>
+		<input type="radio" name="recommendation" value="Very Likely">Very Likely<br>
+		<input type="radio" name="recommendation" value="Likely">Likely<br>
+		<input type="radio" name="recommendation" value="Neutral">Neutral<br>
+		<input type="radio" name="recommendation" value="Unlikely">Unlikely<br>
+		<input type="radio" name="recommendation" value="Very Unlikely">Very Unlikely<br>
+		<br>
+		<label for="feedback">Additional Feedback:</label>
+		<textarea id="feedback" name="feedback" rows="5"></textarea>
+
+		<input type="submit" value="Submit">
+	</form>
+
+	<div class="footer">
+		Company
+	</div>
+
+	<script>
+		var form = document.getElementById("feedback-form");
+		form.addEventListener("submit", function (event) {
+			var name = document.getElementById("name").value;
+			var phone = document.getElementById("phone").value;
+			var email = document.getElementById("email").value;
+			var satisfaction = document.querySelector('input[name="satisfaction"]:checked');
+			var easeOfUse = document.querySelector('input[name="ease-of-use"]:checked');
+			var recommendation = document.querySelector('input[name="recommendation"]:checked');
+
+			if (!name || !email || !satisfaction || !easeOfUse || !recommendation) {
+				alert("Please fill in all required fields.");
+				event.preventDefault();
+			} else if (!validateEmail(email)) {
+				alert("Please enter a valid email address.");
+				event.preventDefault();
+			} else if (!validatePhone(phone)) {
+				alert("Please enter a valid phone number.");
+				event.preventDefault();
+			}
+		});
+
+		function validateEmail(email) {
+			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			return emailRegex.test(email);
+		}
+
+		function validatePhone(phone) {
+			var phoneRegex = /^\+91\d{10}$/;
+			return phoneRegex.test(phone);
+		}
+	</script>
+</body>
+</html>
